@@ -60,4 +60,5 @@ if [ ! -z "$RESIN" ] && [ ! -z "$RESIN_DEVICE_UUID" ]; then
     papirus-set $DISPLAY_SIZE
 fi 
 
+echo "executing command: $@"
 init_systemd "$@"

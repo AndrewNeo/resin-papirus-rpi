@@ -1,6 +1,8 @@
 FROM resin/raspberry-pi-buildpack-deps:jessie
 ENV DISPLAY_SIZE 2.0
 
+RUN [ "cross-build-start" ]
+
 # Install packages for papirus
 RUN apt-get update && apt-get install -y \
   git \
@@ -30,7 +32,8 @@ RUN python3 setup.py install
 
 # Return
 WORKDIR /app
+RUN [ "cross-build-end" ]
 
 # Handle entry point
-ADD entry.sh /usr/bin
-RUN chmod +x /usr/bin/entry.sh
+COPY entry.sh /resin/entry.sh
+ENTRYPOINT ["/resin/entry.sh"]
